@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 18:17:02 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/13 03:26:41 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 05:00:44 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		parse_arg(int argc, char **argv, t_stk *stk)
 	int		nb_values;
 	char	*str_arg;
 
-	if (ft_strlen(argv[1]) != 0 && ft_strcmp(argv[1], "-b") == 0)
+	if (ft_strlen(argv[1]) != 0 && ft_strcmp(argv[1], "-s") == 0)
 		stk->option = 1;
 	if (stk->option == 1)
 		str_arg = argv[2];
@@ -98,6 +98,7 @@ int				init_t_stk(t_stk *stk, int argc, char **argv)
 	stk->top_a = nb_values - 1;
 	stk->top_b = -1;
 	stk->inst = ft_memalloc(1);
+	stk->max = 150;
 	if (init_stk_a(stk, argc, argv, nb_values))
 		return (-1);
 	return (nb_values);

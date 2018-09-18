@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 15:44:58 by alanter           #+#    #+#             */
-/*   Updated: 2018/07/21 19:17:23 by alanter          ###   ########.fr       */
+/*   Updated: 2018/07/24 21:08:08 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int		reader(t_list *fd_lst)
 		if (!((BUFF) = ft_strjoin(tmp, tmp2)))
 			return (-1);
 		ft_memdel((void**)&clean);
-		//if (clean)
-		//	free(clean);
 	}
 	free(tmp);
 	free(tmp2);
@@ -136,8 +134,6 @@ int		get_next_line(const int fd, char **line)
 	if (!(fd_lst = fd_manager(fd, fd_lst, &start_lst)))
 		return (-1);
 	ret = buff_manager(fd_lst, line);
-	//if (ret == 0)
-		//;//free(*line);
 	fd_lst = start_lst;
 	return (ret);
 }

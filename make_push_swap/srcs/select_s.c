@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bubble_s.c                                         :+:      :+:    :+:   */
+/*   select_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/12 18:03:30 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/13 16:53:26 by alanter          ###   ########.fr       */
+/*   Created: 2018/09/18 04:55:09 by alanter           #+#    #+#             */
+/*   Updated: 2018/09/18 05:33:40 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	sort_less_three(t_stk *stk, int size)
 {
+	if (size == 2)
+	{
+		if (stk->stk_a[stk->top_a] > stk->stk_a[stk->top_a - 1])
+			ft_swap(stk, stk->stk_a, stk->top_a, 'a');
+	}
 	if (size == 3)
 	{
 		if (stk->stk_a[stk->top_a] > stk->stk_a[stk->top_a - 1]

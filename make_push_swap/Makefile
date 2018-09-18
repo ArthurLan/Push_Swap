@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 11:26:55 by alanter           #+#    #+#              #
-#    Updated: 2018/09/13 16:50:47 by alanter          ###   ########.fr        #
+#    Updated: 2018/09/18 02:18:14 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ SRC_FILES =	main.c \
 			inst.c \
 			select_s.c \
 			quick_s.c \
+			quick_s_max.c \
 			pushing.c \
 			reduce.c \
 			reduce_b.c \

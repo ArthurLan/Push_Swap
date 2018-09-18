@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 16:30:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/13 04:22:57 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 05:16:12 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int			main(int argc, char **argv)
 {
 	t_stk	*stk;
 
+	if (argc < 1 || argv[1] == NULL)
+		return (-1);
 	if (!(stk = (t_stk*)ft_memalloc(sizeof(t_stk))))
 		return (-1);
 	if (!(check_input(argc, argv, stk)))
@@ -108,7 +110,11 @@ int			main(int argc, char **argv)
 		if (stk->visual != 1)
 		{
 			while (get_next_line(0, &stk->inst) > 0)
+			{
 				inst(stk->inst, stk);
+				free(stk->inst);
+			}
+			free(stk->inst);
 		}
 		else
 			window(*stk);

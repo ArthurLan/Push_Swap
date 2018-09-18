@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 12:38:16 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/13 20:05:40 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 05:33:59 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,26 @@ int				main(int argc, char **argv)
 {
 	t_stk	*stk;
 	int		nb_values;
-	//char	*bubble;
 
-	if (!(stk = (t_stk*)ft_memalloc(sizeof(t_stk))))
-		return (-1);
-	if (!(check_input(argc, argv, stk)))
+	if (argc > 1 && argv[1] != NULL)
 	{
-		if ((nb_values = init_t_stk(stk, argc, argv)) == -1)
+		if (!(stk = (t_stk*)ft_memalloc(sizeof(t_stk))))
 			return (-1);
-		if (nb_values > 0)
+		if (!(check_input(argc, argv, stk)))
 		{
-			if (stk->select_s == 1)// || nb_values <= 25)
-				select_s(stk, nb_values);
-			else
-				quick_s(stk, nb_values);
-			improve(stk);
-			ft_printf(stk->inst);
+			if ((nb_values = init_t_stk(stk, argc, argv)) == -1)
+				return (-1);
+			if (nb_values > 0)
+			{
+				if (stk->select_s == 1 || nb_values <= 25)
+					select_s(stk, nb_values);
+				else
+					quick_s(stk, nb_values);
+				improve(stk);
+				ft_printf(stk->inst);
+			}
+			clean_free(stk);
 		}
-		clean_free(stk);
 	}
 	return (0);
 }
