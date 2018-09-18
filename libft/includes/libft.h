@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 20:45:14 by alanter           #+#    #+#             */
-/*   Updated: 2018/08/26 21:15:12 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/19 00:02:50 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void			ft_cleanfree(char **s1);
 long long int	ft_atoll(const char *str);
 void			ft_switchar(char *c1, char *c2);
 char			*ft_statjoin(char *s1, char **s2, int n1, int n2);
-char            *ft_joinstat(char **s1, char *s2, int n1, int n2);
+char			*ft_joinstat(char **s1, char *s2, int n1, int n2);
 char			*ft_wctostr(wint_t wc);
 size_t			ft_wordcounter(char *str, char c);
 size_t			ft_nbrcounter(char *str, char c);

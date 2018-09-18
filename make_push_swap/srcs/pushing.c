@@ -6,13 +6,13 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 16:59:21 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/13 02:32:43 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 23:44:25 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_to_b(t_stk *stk, int size, int b)
+int		ft_to_b(t_stk *stk, int size)
 {
 	int med;
 	int tmp_stk[size];

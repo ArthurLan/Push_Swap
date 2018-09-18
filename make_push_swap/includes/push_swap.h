@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 16:34:11 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/18 03:01:30 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 23:44:24 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			ft_swap(t_stk *stk, int *stack, int size, int select);
 void			ft_rotate(t_stk *stk, int *stack, int size, int select);
 void			ft_rev_rotate(t_stk *stk, int *stack, int size, int select);
 void			ft_push(t_stk *stk, int select);
-int				ft_to_b(t_stk *stk, int size, int b);
+int				ft_to_b(t_stk *stk, int size);
 int				ft_to_a(t_stk *stk, int size_b, int b);
 int				push_small_a(t_stk *stk, int *size_b);
 int				sort_two_three(t_stk *stk, int size);

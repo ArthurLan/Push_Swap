@@ -6,13 +6,13 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 02:41:06 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/18 02:49:25 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 23:47:41 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		in_stk_a(t_stk *stk, int val, int i)
+static int		in_stk_a(t_stk *stk, int val)
 {
 	int top;
 
@@ -52,7 +52,7 @@ static int		select_s_stk(t_stk *stk, int size)
 		if (stk->stk_b[stk->top_b] == tmp_stk[i])
 		{
 			ft_push(stk, 'b');
-			if (in_stk_a(stk, tmp_stk[i], i))
+			if (in_stk_a(stk, tmp_stk[i]))
 				i++;
 		}
 		else
@@ -110,7 +110,7 @@ void			quick_s_max(t_stk *stk, int s_max)
 		while (size_a > 3 && sorted(stk) != stk->top_a)
 		{
 			b++;
-			size_b[b] = ft_to_b(stk, size_a, b);
+			size_b[b] = ft_to_b(stk, size_a);
 			size_a = size_a - size_b[b];
 		}
 		quick_sa_bis(stk, size_b, &size_a, &b);

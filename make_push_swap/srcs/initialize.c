@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 18:17:02 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/18 05:00:44 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 22:28:45 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int		check_dbl(int *top, int stored_val, int new_nb)
 	{
 		if (top[stored_val] == new_nb)
 		{
-			ft_printf("Error : a number can't be there twice\n");
+			write(2, "Error : a number can't be there twice.\n", 39);
 			return (1);
 		}
 	}
@@ -60,17 +60,19 @@ static int		init_stk_a(t_stk *stk, int argc, char **argv, int nb_values)
 {
 	static int	i = -1;
 	static int	k = 0;
+	int			op;
 
+	op = stk->option + 1;
 	if (stk->arg == 1)
 	{
-		while (++i < nb_values && argv[1][k] != 0)
+		while (++i < nb_values && argv[op][k] != 0)
 		{
-			if (check_dbl(&stk->stk_a[nb_values - i], i, ft_atoi(&argv[1][k])))
+			if (check_dbl(&stk->stk_a[nb_values - i], i, ft_atoi(&argv[op][k])))
 				return (1);
-			stk->stk_a[nb_values - 1 - i] = ft_atoi(&argv[1][k]);
-			while (argv[1][k] != ' ' && argv[1][k] != 0)
+			stk->stk_a[nb_values - 1 - i] = ft_atoi(&argv[op][k]);
+			while (argv[op][k] != ' ' && argv[op][k] != 0)
 				k++;
-			while (argv[1][k] == ' ' && argv[1][k] != 0)
+			while (argv[op][k] == ' ' && argv[op][k] != 0)
 				k++;
 		}
 	}
@@ -80,7 +82,6 @@ static int		init_stk_a(t_stk *stk, int argc, char **argv, int nb_values)
 			return (1);
 		stk->stk_a[i] = ft_atoi(argv[argc - 1 - i]);
 	}
-	sort_s(stk, nb_values);
 	return (0);
 }
 
@@ -101,5 +102,6 @@ int				init_t_stk(t_stk *stk, int argc, char **argv)
 	stk->max = 150;
 	if (init_stk_a(stk, argc, argv, nb_values))
 		return (-1);
+	sort_s(stk, nb_values);
 	return (nb_values);
 }

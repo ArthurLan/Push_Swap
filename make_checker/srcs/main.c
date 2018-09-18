@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 16:30:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/18 05:16:12 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 23:23:36 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,48 +22,17 @@ void		sorted(t_stk *stk, int size)
 	if (nb_sort + 1 == size)
 		ft_printf("OK\n");
 	else
-		ft_printf("KO\nnb_sort = %d, size = %d\n", nb_sort, size);
+		ft_printf("KO\n");
 }
 
-static void	exec(t_stk *stk, int i)
+static int	check_input_b(char **argv, int i)
 {
-	void	(*ptr[4])(int *stack, int top);
-
-	ptr[0] = ft_swap;
-	ptr[1] = ft_rotate;
-	ptr[2] = ft_rev_rotate;
-	if (i < 3)
-		(*ptr[i])(stk->stk_a, stk->top_a);
-	else if (i < 6)
-		(*ptr[i - 3])(stk->stk_b, stk->top_b);
-	else if (i < 9)
+	if (ft_atoll(argv[i]) > INT_MAX || ft_atoll(argv[i]) < INT_MIN)
 	{
-		(*ptr[i - 6])(stk->stk_a, stk->top_a);
-		(*ptr[i - 6])(stk->stk_b, stk->top_b);
+		write(2, "Error : int only.\n", 18);
+		return (-1);
 	}
-	else if (i == 9)
-		ft_push(stk->stk_b, stk->stk_a, &(stk->top_b), &(stk->top_a));
-	else if (i == 10)
-		ft_push(stk->stk_a, stk->stk_b, &(stk->top_a), &(stk->top_b));
-}
-
-void		inst(char *inst_in, t_stk *stk)
-{
-	int			i;
-	static char	*inst[] = {"sa", "ra", "rra", "sb", "rb", "rrb", "ss", "rr",
-		"rrr", "pa", "pb"};
-
-	i = 0;
-	while (i < 11)
-	{
-		if (!(ft_strcmp(inst[i], inst_in)))
-			break ;
-		i++;
-	}
-	if (i >= 11)
-		ft_printf("Error : wrong instruction\n");
-	else
-		exec(stk, i);
+	return (0);
 }
 
 static int	check_input(int argc, char **argv, t_stk *stk)
@@ -77,17 +46,16 @@ static int	check_input(int argc, char **argv, t_stk *stk)
 	while (++i < argc)
 	{
 		j = -1;
-		if (ft_atoll(argv[i]) > INT_MAX || ft_atoll(argv[i]) < INT_MIN)
-		{
-			ft_printf("Error : argument too big or too small. (int only)\n");
+		if (check_input_b(argv, i) == -1)
 			return (-1);
-		}
 		while (argv[i][++j] != 0)
 		{
-			if (!(ft_isdigit(argv[i][j]) || argv[i][j] == '-'
-						|| argv[i][j] == ' '))
+			if (argv[i][0] == '"' && ft_strlen(argv[i] - 1) == '"' && j++)
+				argv[i][ft_strlen(argv[i] - 1)] = ' ';
+			if (!(ft_isdigit(argv[i][j]) || argv[i][j] == ' '
+						|| (argv[i][j] == '-' && ft_isdigit(argv[i][j + 1]))))
 			{
-				ft_printf("Error : one or several argument isn't a number.\n");
+				write(2, "Error : numbers only (int only).\n", 33);
 				return (-1);
 			}
 		}
@@ -95,17 +63,15 @@ static int	check_input(int argc, char **argv, t_stk *stk)
 	return (0);
 }
 
-int			main(int argc, char **argv)
+int			main(int ac, char **av)
 {
 	t_stk	*stk;
 
-	if (argc < 1 || argv[1] == NULL)
+	if (ac < 1 || av[1] == NULL || !(stk = (t_stk*)ft_memalloc(sizeof(t_stk))))
 		return (-1);
-	if (!(stk = (t_stk*)ft_memalloc(sizeof(t_stk))))
-		return (-1);
-	if (!(check_input(argc, argv, stk)))
+	if (!(check_input(ac, av, stk)))
 	{
-		if ((stk->nb_values = init_t_stk(stk, argc, argv)) == -1)
+		if ((stk->nb_values = init_t_stk(stk, ac, av)) == -1)
 			return (-1);
 		if (stk->visual != 1)
 		{
@@ -118,8 +84,8 @@ int			main(int argc, char **argv)
 		}
 		else
 			window(*stk);
+		sorted(stk, stk->nb_values);
 	}
-	sorted(stk, stk->nb_values);
 	free(stk->stk_a);
 	free(stk->stk_b);
 	free(stk);

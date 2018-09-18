@@ -6,13 +6,13 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 16:28:30 by alanter           #+#    #+#             */
-/*   Updated: 2018/07/21 20:10:17 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/18 21:31:52 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t     ft_wordcounter(char *s2, char c)
+size_t	ft_wordcounter(char *s2, char c)
 {
 	size_t i;
 	size_t count;

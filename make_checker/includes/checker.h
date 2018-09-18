@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 11:24:02 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/13 04:29:12 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/19 00:59:39 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ typedef struct	s_mlx
 	int			speed;
 	int			ok;
 	int			print_ok;
+	int			nb_inst;
+	int			menu;
+	int			val_h;
+	int			a_back;
+	int			b_back;
+	int			a_p;
+	int			a_n;
+	int			b_p;
+	int			b_n;
 }				t_mlx;
 
 void			*window(t_stk stk);
@@ -66,8 +75,12 @@ void			ft_rev_rotate(int *stack, int size);
 void			ft_push(int *src, int *dst, int *top_s, int *top_d);
 int				init_t_stk(t_stk *stk, int argc, char **argv);
 void			draw_str(t_mlx *mlx);
-void			draw_back(unsigned int *img);
-void			draw_stkb(unsigned int *img, t_stk stk, int val_h);
-void			draw_stka(unsigned int *img, t_stk stk, int val_h);
+void			draw_back(unsigned int *img, t_mlx *mlx);
+void			draw_stkb(unsigned int *img, t_stk stk, int val_h, t_mlx *mlx);
+void			draw_stka(unsigned int *img, t_stk stk, int top, t_mlx *mlx);
+void			colors(int key, t_mlx *mlx);
+void			colorfull(t_mlx *mlx);
+void			inst(char *inst_in, t_stk *stk);
+void			ft_new_image(t_mlx *mlx, t_stk stk, int val_h);
 
 #endif

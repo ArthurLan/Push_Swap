@@ -6,13 +6,13 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 11:26:55 by alanter           #+#    #+#              #
-#    Updated: 2018/09/18 03:51:51 by alanter          ###   ########.fr        #
+#    Updated: 2018/09/19 00:24:36 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################## PROJECT ########################
 
-NAME = ../checker
+NAME = checker
 
 ########################## OS ###########################
 
@@ -33,7 +33,7 @@ STR_SUCCESS = $(GREEN)SUCCESS$(BLUE).\n$(NORMAL)
 ######################### FLAGS #########################
 
 ifeq ($(OS),Darwin)
-	FLAGS_DEFAULT = -g3 #-pedantic -Wall -Werror -Wextra -g3 -fsanitize=address
+	FLAGS_DEFAULT = -g3 -Wall -Werror -Wextra #-fsanitize=address
 	FLAGS_MLX = -framework OpenGL -framework Appkit
 else 
 	FLAGS_DEFAULT = -Wall -Werror -Wextra
@@ -78,9 +78,11 @@ INC = $(addprefix $(INC_PREF), $(INC_DIR))
 SRC_PATH = ./srcs/
 SRC_FILES =	main.c \
 			inst.c \
+			exec.c \
 			window.c \
 			initialize.c \
-			draw.c
+			draw.c \
+			colors.c
 SRCS = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
 ######################## OBJECTS ########################
@@ -98,6 +100,7 @@ $(NAME): $(LIBFT) $(LIBMLX) $(OBJ_DIR) $(OBJS)
 	@printf "$(LINE_ERASER)$(RED)$@: $(BLUE)Objects compilation: $(STR_SUCCESS)"
 	@printf "$(RED)$@: $(BLUE)Compiling project: $(NORMAL)"
 	@$(CC) $(FLAGS_DEFAULT) $(OBJS) $(FLAGS_LIB) -o $@
+	@mv ./$(NAME) ../
 	@printf "$(STR_SUCCESS)"
 	@printf "$(RED)$@: $(GREEN)project ready.$(NORMAL)\n"
 
@@ -117,7 +120,7 @@ clean:
 
 fclean:
 	@printf "$(RED)$(NAME): $(BLUE)Cleaning project: $(NORMAL)"
-	@$(RM) $(NAME)
+	@$(RM) ../$(NAME)
 	@printf "$(STR_SUCCESS)"
 
 re: fclean all

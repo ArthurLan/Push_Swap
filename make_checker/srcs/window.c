@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:43 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/13 04:39:49 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/19 00:59:18 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,54 @@
 
 void		ft_new_image(t_mlx *mlx, t_stk stk, int val_h)
 {
+	if (mlx->stk.top_a)
+		;
+	if (stk.top_a)
+		;
+	if (val_h)
+		;
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img.img_ptr);
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
 	mlx->img.img = (unsigned int*)mlx_get_data_addr(mlx->img.img_ptr,
 			&(mlx->img.size_l), &(mlx->img.bpp), &(mlx->img.endian));
-	draw_back(mlx->img.img);
-	draw_stka(mlx->img.img, stk, val_h);
-	draw_stkb(mlx->img.img, stk, val_h);
+	draw_back(mlx->img.img, mlx);
+	draw_stka(mlx->img.img, stk, stk.top_a, mlx);
+	draw_stkb(mlx->img.img, stk, val_h, mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, mlx->img.img_ptr, 0, 0);
 	draw_str(mlx);
 }
 
 int			loop_sort(t_mlx *mlx)
 {
-	int			val_h;
 	static int	i;
 
-	val_h = WIN_H / mlx->stk.nb_values;
 	i = 0;
 	if ((mlx->ok = get_next_line(0, &(mlx->stk.inst))) > 0)
 	{
+		mlx->nb_inst += 1;
 		inst(mlx->stk.inst, &(mlx->stk));
 		if (mlx->speed >= 50)
 		{
 			usleep(mlx->speed);
-			ft_new_image(mlx, mlx->stk, val_h);
+			ft_new_image(mlx, mlx->stk, mlx->val_h);
 		}
 		else if (mlx->stk.top_a % 5 == 0
 				|| mlx->stk.top_a >= mlx->stk.max - 3)
-			ft_new_image(mlx, mlx->stk, val_h);
+			ft_new_image(mlx, mlx->stk, mlx->val_h);
 	}
 	if (mlx->ok == 0 && (mlx->print_ok = 1))
-		ft_new_image(mlx, mlx->stk, val_h);
+		ft_new_image(mlx, mlx->stk, mlx->val_h);
+	free(mlx->stk.inst);
 	return (0);
 }
 
 int			deal_key(int key, t_mlx *mlx)
 {
+	if (key == 46)
+	{
+		mlx->menu = (mlx->menu == 0) ? 1 : 0;
+		ft_new_image(mlx, mlx->stk, mlx->val_h);
+	}
 	if (key == 124)
 	{
 		if (mlx->speed >= 50)
@@ -65,6 +76,8 @@ int			deal_key(int key, t_mlx *mlx)
 	}
 	if (key == 53)
 		exit(0);
+	else
+		colors(key, mlx);
 	return (0);
 }
 
@@ -87,11 +100,10 @@ int			store_max_w(t_stk stk)
 void		*window(t_stk stk)
 {
 	t_mlx	*mlx;
-	int		val_h;
 
 	if (!(mlx = ft_memalloc(sizeof(t_mlx))))
 		return (NULL);
-	val_h = WIN_H / stk.nb_values;
+	mlx->val_h = WIN_H / stk.nb_values;
 	mlx->speed = 500000;
 	stk.max = store_max_w(stk);
 	mlx->stk = stk;
@@ -100,9 +112,10 @@ void		*window(t_stk stk)
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
 	mlx->img.img = (unsigned int*)mlx_get_data_addr(mlx->img.img_ptr,
 			&(mlx->img.size_l), &(mlx->img.bpp), &(mlx->img.endian));
-	draw_back(mlx->img.img);
-	draw_stka(mlx->img.img, stk, val_h);
-	draw_stkb(mlx->img.img, stk, val_h);
+	colorfull(mlx);
+	draw_back(mlx->img.img, mlx);
+	draw_stka(mlx->img.img, stk, stk.top_a, mlx);
+	draw_stkb(mlx->img.img, stk, mlx->val_h, mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, mlx->img.img_ptr, 0, 0);
 	draw_str(mlx);
 	mlx_key_hook(mlx->win, deal_key, mlx);

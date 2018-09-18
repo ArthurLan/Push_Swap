@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 11:26:55 by alanter           #+#    #+#              #
-#    Updated: 2018/08/14 12:52:17 by alanter          ###   ########.fr        #
+#    Updated: 2018/09/18 23:30:17 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ STR_SUCCESS = $(GREEN)SUCCESS$(BLUE).\n$(NORMAL)
 ######################### FLAGS #########################
 
 ifeq ($(OS),Darwin)
-	FLAGS_DEFAULT = -g3 #-pedantic -Wall -Werror -Wextra -g3 -fsanitize=address
+	FLAGS_DEFAULT = -g3 -Wall -Werror -Wextra
 	FLAGS_MLX = -framework OpenGL -framework Appkit
 else 
 	FLAGS_DEFAULT = -Wall -Werror -Wextra

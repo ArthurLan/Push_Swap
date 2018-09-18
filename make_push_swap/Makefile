@@ -6,13 +6,13 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 11:26:55 by alanter           #+#    #+#              #
-#    Updated: 2018/09/18 02:18:14 by alanter          ###   ########.fr        #
+#    Updated: 2018/09/19 00:05:43 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################## PROJECT ########################
 
-NAME = ../push_swap 
+NAME = push_swap 
 
 ########################## OS ###########################
 
@@ -33,7 +33,7 @@ STR_SUCCESS = $(GREEN)SUCCESS$(BLUE).\n$(NORMAL)
 ######################### FLAGS #########################
 
 ifeq ($(OS),Darwin)
-	FLAGS_DEFAULT = # -fsanitize=address #-g3 # -pedantic -Wall -Werror -Wextra -g3 -fsanitize=address
+	FLAGS_DEFAULT = -g3 -Wall -Werror -Wextra
 	FLAGS_MLX = -framework OpenGL -framework Appkit
 else 
 	FLAGS_DEFAULT = -Wall -Werror -Wextra
@@ -104,6 +104,7 @@ $(NAME): $(LIBFT) $(LIBMLX) $(OBJ_DIR) $(OBJS)
 	@printf "$(LINE_ERASER)$(RED)$@: $(BLUE)Objects compilation: $(STR_SUCCESS)"
 	@printf "$(RED)$@: $(BLUE)Compiling project: $(NORMAL)"
 	@$(CC) $(FLAGS_DEFAULT) $(OBJS) $(FLAGS_LIB) -o $@
+	@mv ./$(NAME) ../
 	@printf "$(STR_SUCCESS)"
 	@printf "$(RED)$@: $(GREEN)project ready.$(NORMAL)\n"
 
@@ -123,7 +124,7 @@ clean:
 
 fclean:
 	@printf "$(RED)$(NAME): $(BLUE)Cleaning project: $(NORMAL)"
-	@$(RM) $(NAME)
+	@$(RM) ../$(NAME)
 	@printf "$(STR_SUCCESS)"
 
 re: fclean all
