@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 11:24:02 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/19 00:59:39 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/19 02:34:38 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_stk
 	int		option;
 	int		arg;
 	int		max;
+	int		size;
 	int		visual;
 }				t_stk;
 
@@ -82,5 +83,6 @@ void			colors(int key, t_mlx *mlx);
 void			colorfull(t_mlx *mlx);
 void			inst(char *inst_in, t_stk *stk);
 void			ft_new_image(t_mlx *mlx, t_stk stk, int val_h);
+int				sorted(t_stk *stk, int size);
 
 #endif

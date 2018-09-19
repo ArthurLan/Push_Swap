@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:43 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/19 00:59:18 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/19 03:06:01 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 void		ft_new_image(t_mlx *mlx, t_stk stk, int val_h)
 {
-	if (mlx->stk.top_a)
-		;
-	if (stk.top_a)
-		;
-	if (val_h)
-		;
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img.img_ptr);
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
 	mlx->img.img = (unsigned int*)mlx_get_data_addr(mlx->img.img_ptr,
@@ -33,10 +27,9 @@ void		ft_new_image(t_mlx *mlx, t_stk stk, int val_h)
 
 int			loop_sort(t_mlx *mlx)
 {
-	static int	i;
+	static int	i = 0;
 
-	i = 0;
-	if ((mlx->ok = get_next_line(0, &(mlx->stk.inst))) > 0)
+	if (i == 0 && (mlx->ok = get_next_line(0, &(mlx->stk.inst))) > 0)
 	{
 		mlx->nb_inst += 1;
 		inst(mlx->stk.inst, &(mlx->stk));
@@ -45,13 +38,15 @@ int			loop_sort(t_mlx *mlx)
 			usleep(mlx->speed);
 			ft_new_image(mlx, mlx->stk, mlx->val_h);
 		}
-		else if (mlx->stk.top_a % 5 == 0
-				|| mlx->stk.top_a >= mlx->stk.max - 3)
+		else if (mlx->nb_inst % 5 == 0 || mlx->print_ok == 1)
 			ft_new_image(mlx, mlx->stk, mlx->val_h);
 	}
 	if (mlx->ok == 0 && (mlx->print_ok = 1))
 		ft_new_image(mlx, mlx->stk, mlx->val_h);
-	free(mlx->stk.inst);
+	if (i == 0)
+		free(mlx->stk.inst);
+	if (mlx->stk.inst[0] == 0)
+		i = 1;
 	return (0);
 }
 

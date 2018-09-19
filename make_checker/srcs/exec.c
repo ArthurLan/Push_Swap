@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 22:30:52 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/18 23:02:58 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/19 03:07:40 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void		inst(char *inst_in, t_stk *stk)
 		i++;
 	}
 	if (i >= 11)
+	{
 		write(2, "Error : wrong instruction\n", 26);
+		exit(0);
+	}
 	else
 		exec(stk, i);
 }

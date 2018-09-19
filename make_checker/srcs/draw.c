@@ -6,7 +6,7 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 04:25:21 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/19 01:03:56 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/19 03:06:04 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	menu(t_mlx *mlx, int c)
 		mlx_string_put(mlx->mlx_ptr,
 				mlx->win, WIN_W - 190, 145, c, "Esc : Quit");
 	}
-	if (mlx->print_ok == 1)
+	if (mlx->print_ok == 1 && sorted(&mlx->stk, mlx->stk.size) == 1)
 		mlx_string_put(mlx->mlx_ptr, mlx->win, WIN_W / 2, WIN_H / 2, c, "OK");
+	else if (mlx->print_ok == 1 && sorted(&mlx->stk, mlx->stk.size) == -1)
+		mlx_string_put(mlx->mlx_ptr, mlx->win, WIN_W / 2, WIN_H / 2, c, "KO");
 }
 
 void	draw_str(t_mlx *mlx)
@@ -64,6 +66,7 @@ void	draw_str(t_mlx *mlx)
 		mlx_string_put(mlx->mlx_ptr, mlx->win, WIN_W / 50, 5, c, "X1");
 	else if (mlx->speed < 5000000)
 		mlx_string_put(mlx->mlx_ptr, mlx->win, WIN_W / 50, 5, c, "X0.1");
+	mlx->stk.size = mlx->stk.top_a + mlx->stk.top_b + 2;
 	menu(mlx, c);
 }
 

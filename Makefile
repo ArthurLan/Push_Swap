@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 11:26:55 by alanter           #+#    #+#              #
-#    Updated: 2018/09/18 23:30:17 by alanter          ###   ########.fr        #
+#    Updated: 2018/09/19 02:44:27 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ clean:
 	@$(MAKE) clean -C $(LIBFT_PATH)
 	@$(MAKE) clean -C $(LIBMLX_PATH) > .tmp_proj
 	@$(RM) .tmp_proj
+	@$(RM) -rf *.dSYM
 	@$(MAKE) clean -C $(CHECKER_PATH)
 	@$(MAKE) clean -C $(PUSH_SWAP_PATH)
 

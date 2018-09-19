@@ -6,7 +6,7 @@
 #    By: alanter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 11:26:55 by alanter           #+#    #+#              #
-#    Updated: 2018/09/19 00:05:43 by alanter          ###   ########.fr        #
+#    Updated: 2018/09/19 02:47:15 by alanter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ $(NAME): $(LIBFT) $(LIBMLX) $(OBJ_DIR) $(OBJS)
 	@printf "$(LINE_ERASER)$(RED)$@: $(BLUE)Objects compilation: $(STR_SUCCESS)"
 	@printf "$(RED)$@: $(BLUE)Compiling project: $(NORMAL)"
 	@$(CC) $(FLAGS_DEFAULT) $(OBJS) $(FLAGS_LIB) -o $@
-	@mv ./$(NAME) ../
+	@cp ./$(NAME) ../
 	@printf "$(STR_SUCCESS)"
 	@printf "$(RED)$@: $(GREEN)project ready.$(NORMAL)\n"
 
@@ -124,7 +124,7 @@ clean:
 
 fclean:
 	@printf "$(RED)$(NAME): $(BLUE)Cleaning project: $(NORMAL)"
-	@$(RM) ../$(NAME)
+	@$(RM) ../$(NAME) $(NAME)
 	@printf "$(STR_SUCCESS)"
 
 re: fclean all

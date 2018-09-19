@@ -6,23 +6,37 @@
 /*   By: alanter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 16:30:53 by alanter           #+#    #+#             */
-/*   Updated: 2018/09/18 23:23:36 by alanter          ###   ########.fr       */
+/*   Updated: 2018/09/19 03:07:43 by alanter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void		sorted(t_stk *stk, int size)
+int			sorted(t_stk *stk, int size)
 {
-	int nb_sort;
+	int			nb_sort;
+	static int	i = 0;
 
 	nb_sort = 0;
 	while (nb_sort + 1 < size && stk->stk_a[nb_sort + 1] < stk->stk_a[nb_sort])
 		nb_sort++;
-	if (nb_sort + 1 == size)
+	if (nb_sort + 1 >= size && i == 0)
+	{
 		ft_printf("OK\n");
-	else
+		i = 1;
+		return (1);
+	}
+	else if (i == 0)
+	{
 		ft_printf("KO\n");
+		i = -1;
+		return (-1);
+	}
+	if (i == 1)
+		return (1);
+	else if (i == -1)
+		return (-1);
+	return (0);
 }
 
 static int	check_input_b(char **argv, int i)
